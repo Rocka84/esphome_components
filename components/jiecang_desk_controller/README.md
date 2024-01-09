@@ -58,17 +58,34 @@ TX  | RX
 ## Usage
 
 ```yaml
-uart:
-  id: uart_bus
-  tx_pin: TX
-  rx_pin: RX
-  baud_rate: 9600
+esphome:
+  ...
+  on_boot:
+    # This script is required to initialize the following sensors:
+    #    height_pct, height_min, height_max, position1 - position4
+    # You can skip this if you don't use those.
+    priority: 0 # when mostly everything else is done
+    then:
+      - lambda: "id(my_desk).request_physical_limits();"
+      - delay: 0.1s
+      - lambda: "id(my_desk).request_limits();"
+      - delay: 0.1s
+      - lambda: "id(my_desk).request_settings();"
 
 external_components:
   - source:
       type: git
       url: https://github.com/Rocka84/esphome_components/
     components: [ jiecang_desk_controller ]
+
+uart:
+  id: uart_bus
+  tx_pin: TX
+  rx_pin: RX
+  baud_rate: 9600
+
+logger:
+  baud_rate: 0 # disable logging over uart, required when using the RX/TX pins for the controller
 
 jiecang_desk_controller:
   id: my_desk
