@@ -54,10 +54,11 @@ namespace esphome {
             switch (message[0]) {
                 case 0x01:
                     ESP_LOGV("jiecang_desk_controller", "height 0x%0X%0X", message[2], message[3]);
-                    if (height != nullptr) height->publish_state(byte2float(message[2], message[3]));
+                    current_height = byte2float(message[2], message[3]);
+                    if (height != nullptr) height->publish_state(current_height);
 
-                    if (height_pct != nullptr)
-                        height_pct->publish_state((height->state - height_min->state) / (height_max->state - height_min->state) * 100);
+                    if (height_pct != nullptr && limit_max != 0)
+                        height_pct->publish_state((current_height - limit_min) / (limit_max - limit_min) * 100);
                     break;
 
                 case 0x0e:
@@ -68,11 +69,13 @@ namespace esphome {
                 case 0x20:
                     ESP_LOGV("jiecang_desk_controller", "limits 0x%0X  max %i min %i", message[2], (message[2] & 1), (message[2]>>4));
 
-                    if (height_min != nullptr && (message[2] & 1) == 0) { // low nibble 0 -> no max limit, use physical_max
-                        height_max->publish_state(physical_max);
+                    if ((message[2] & 1) == 0) { // low nibble 0 -> no max limit, use physical_max
+                        limit_max = physical_max;
+                        if (height_max != nullptr) height_max->publish_state(limit_max);
                     }
-                    if (height_max != nullptr && (message[2]>>4) == 0) { // high nibble 0 -> no min limit, use physical_min
-                        height_min->publish_state(physical_min);
+                    if ((message[2]>>4) == 0) { // high nibble 0 -> no min limit, use physical_min
+                        limit_min = physical_min;
+                        if (height_min != nullptr) height_min->publish_state(limit_min);
                     }
                     break;
 
@@ -84,12 +87,14 @@ namespace esphome {
 
                 case 0x21:
                     ESP_LOGV("jiecang_desk_controller", "height_max 0x%02X%02X", message[2], message[3]);
-                    if (height_max != nullptr) height_max->publish_state(byte2float(message[2], message[3]));
+                    limit_max = byte2float(message[2], message[3]);
+                    if (height_max != nullptr) height_max->publish_state(limit_max);
                     break;
 
                 case 0x22:
                     ESP_LOGV("jiecang_desk_controller", "height_min 0x%02X%02X", message[2], message[3]);
-                    if (height_min != nullptr) height_min->publish_state(byte2float(message[2], message[3]));
+                    limit_min = byte2float(message[2], message[3]);
+                    if (height_min != nullptr) height_min->publish_state(limit_min);
                     break;
 
                 case 0x25:

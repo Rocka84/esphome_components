@@ -20,6 +20,9 @@ namespace esphome {
 
         class JiecangDeskController : public PollingComponent, public sensor::Sensor, public uart::UARTDevice {
             private:
+                float current_height = 0;
+                float limit_min = 0;
+                float limit_max = 0;
                 float physical_min = 0;
                 float physical_max = 0;
 
