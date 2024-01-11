@@ -54,16 +54,14 @@ namespace esphome {
             switch (message[0]) {
                 case 0x01:
                     ESP_LOGV("jiecang_desk_controller", "height 0x%0X%0X", message[2], message[3]);
-                    current_height = byte2float(message[2], message[3]);
+                    float new_height;
+                    new_height = byte2float(message[2], message[3]);
+                    if (new_height == current_height) return;
+                    current_height = new_height;
                     if (height != nullptr) height->publish_state(current_height);
 
                     if (height_pct != nullptr && limit_max != 0)
                         height_pct->publish_state((current_height - limit_min) / (limit_max - limit_min) * 100);
-                    break;
-
-                case 0x0e:
-                    ESP_LOGV("jiecang_desk_controller", "unit 0x%0X", message[2]);
-                    if (unit != nullptr) unit->publish_state(message[2]);
                     break;
 
                 case 0x20:

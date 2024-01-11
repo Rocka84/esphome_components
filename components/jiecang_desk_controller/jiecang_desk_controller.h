@@ -34,7 +34,6 @@ namespace esphome {
                 void update() override;
 
                 void set_sensor_height(sensor::Sensor *sensor) { this->height = sensor; }
-                void set_sensor_unit(sensor::Sensor *sensor) { this->unit = sensor; }
                 void set_sensor_height_min(sensor::Sensor *sensor) { this->height_min = sensor; }
                 void set_sensor_height_max(sensor::Sensor *sensor) { this->height_max = sensor; }
                 void set_sensor_height_pct(sensor::Sensor *sensor) { this->height_pct = sensor; }
@@ -57,7 +56,6 @@ namespace esphome {
 
             protected:
                 Sensor *height{nullptr};
-                Sensor *unit{nullptr};
                 Sensor *height_min{nullptr};
                 Sensor *height_max{nullptr};
                 Sensor *height_pct{nullptr};
