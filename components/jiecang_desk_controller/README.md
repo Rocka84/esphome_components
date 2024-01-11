@@ -115,10 +115,10 @@ height     | current height of the desk
 height_pct | height in percent
 height_min | minimal height
 height_max | maximal height
-position1  | height of 1st stored height
-position2  | height of 2nd stored height
-position3  | height of 3rd stored height
-position4  | height of 4th stored height
+position1  | 1st stored height
+position2  | 2nd stored height
+position3  | 3rd stored height
+position4  | 4th stored height
 
 ### Available buttons and methods
 
