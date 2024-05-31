@@ -2,6 +2,8 @@
 
 [ESPHome](https://esphome.io/) component for controlling Jiecang desk controllers via their serial protocol.
 
+![](https://github.com/Rocka84/esphome_components/assets/2353088/b04d1fd7-d0ed-443d-87b7-87454757c0f0)
+
 Attention: I only have one [RJ12 model](https://www.jiecang.com/product/jcb35m11c.html) to test this
 but it's likely that other Jiecang controllers are supported as their serial protocol should be compatible.
 
@@ -54,6 +56,8 @@ GND | GND
 5V  | VCC
 RX  | TX
 TX  | RX
+
+![](https://github.com/Rocka84/esphome_components/assets/2353088/39e08774-a215-4e7e-8345-a2acafce28a2)
 
 ## Usage
 
