@@ -135,6 +135,10 @@ position2  | `id(my_desk).goto_position(2)` | move to 2nd stored height
 position3  | `id(my_desk).goto_position(3)` | move to 3rd stored height
 position4  | `id(my_desk).goto_position(4)` | move to 4th stored height
 
+## Case
+
+You can find a 3D-printable case in the [stl folder](stl/) or on [onshape](https://cad.onshape.com/documents/9619b6e4e11b26a3e9d82630/w/ca8259951d8b6bb3513992f7/e/2aa1144a31e5b4c252a13681?renderMode=0&uiState=665987de1c1f4a6c5d2d97a4).
+
 ## Sources
 
 Thanks to [phord/Jarvis](https://github.com/phord/Jarvis) for reverse engineering the UART interface and most control messages
