@@ -10,10 +10,11 @@
 
 #define BUTTON_RAISE 0
 #define BUTTON_LOWER 1
-#define BUTTON_POSITION1 2
-#define BUTTON_POSITION2 3
-#define BUTTON_POSITION3 4
-#define BUTTON_POSITION4 5
+#define BUTTON_STOP 2
+#define BUTTON_POSITION1 3
+#define BUTTON_POSITION2 4
+#define BUTTON_POSITION3 5
+#define BUTTON_POSITION4 6
 
 namespace esphome {
     namespace jiecang_desk_controller {
@@ -48,6 +49,7 @@ namespace esphome {
 
                 void raise();
                 void lower();
+                void stop();
                 void goto_position(int pos);
 
                 void request_physical_limits();

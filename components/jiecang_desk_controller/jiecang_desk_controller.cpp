@@ -146,6 +146,10 @@ namespace esphome {
             send_simple_command(0x02);
         }
 
+        void JiecangDeskController::stop() {
+            send_simple_command(0x2B);
+        }
+
         void JiecangDeskController::goto_position(int pos) {
             switch (pos) {
                 case 1:
@@ -183,6 +187,9 @@ namespace esphome {
                     break;
                 case BUTTON_LOWER:
                     lower();
+                    break;
+                case BUTTON_STOP:
+                    stop();
                     break;
                 case BUTTON_POSITION1:
                     goto_position(1);

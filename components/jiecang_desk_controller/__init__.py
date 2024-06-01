@@ -16,6 +16,9 @@ JiecangDeskButton = jiecang_desk_controller_ns.class_('JiecangDeskButton', butto
 CONF_SENSORS = "sensors"
 CONF_BUTTONS = "buttons"
 CONF_UNIT = "unit"
+CONF_RAISE = "raise"
+CONF_LOWER = "lower"
+CONF_STOP = "stop"
 CONF_HEIGHT_MIN = "height_min"
 CONF_HEIGHT_MAX = "height_max"
 CONF_HEIGHT_PCT = "height_pct"
@@ -23,17 +26,16 @@ CONF_POSITION1 = "position1"
 CONF_POSITION2 = "position2"
 CONF_POSITION3 = "position3"
 CONF_POSITION4 = "position4"
-CONF_RAISE = "raise"
-CONF_LOWER = "lower"
 
 
 button_constants = {}
 button_constants[CONF_RAISE] = 0
 button_constants[CONF_LOWER] = 1
-button_constants[CONF_POSITION1] = 2
-button_constants[CONF_POSITION2] = 3
-button_constants[CONF_POSITION3] = 4
-button_constants[CONF_POSITION4] = 5
+button_constants[CONF_STOP] = 2
+button_constants[CONF_POSITION1] = 3
+button_constants[CONF_POSITION2] = 4
+button_constants[CONF_POSITION3] = 5
+button_constants[CONF_POSITION4] = 6
 
 CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
     cv.GenerateID(): cv.declare_id(JiecangDeskController),
@@ -77,6 +79,7 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
     cv.Optional(CONF_BUTTONS): cv.Schema({
         cv.Optional(CONF_RAISE): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
         cv.Optional(CONF_LOWER): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
+        cv.Optional(CONF_STOP): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
         cv.Optional(CONF_POSITION1): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
         cv.Optional(CONF_POSITION2): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
         cv.Optional(CONF_POSITION3): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
