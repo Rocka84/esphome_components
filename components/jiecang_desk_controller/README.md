@@ -126,15 +126,16 @@ position4  | 4th stored height
 
 ### Available buttons and methods
 
-button     | lambda method                  | description
------------|--------------------------------|---------------------------
-raise      | `id(my_desk).raise()`          | raise desk by one step (~14mm)
-lower      | `id(my_desk).raise()`          | lower desk by one step (~14mm)
-stop       | `id(my_desk).stop()`           | stop movement of desk
-position1  | `id(my_desk).goto_position(1)` | move to 1st stored height
-position2  | `id(my_desk).goto_position(2)` | move to 2nd stored height
-position3  | `id(my_desk).goto_position(3)` | move to 3rd stored height
-position4  | `id(my_desk).goto_position(4)` | move to 4th stored height
+button     | lambda method                     | description
+-----------|-----------------------------------|---------------------------
+raise      | `id(my_desk).raise()`             | raise desk by one step (~14mm)
+lower      | `id(my_desk).raise()`             | lower desk by one step (~14mm)
+stop       | `id(my_desk).stop()`              | stop movement of desk
+position1  | `id(my_desk).goto_position(1)`    | move to 1st stored height
+position2  | `id(my_desk).goto_position(2)`    | move to 2nd stored height
+position3  | `id(my_desk).goto_position(3)`    | move to 3rd stored height
+position4  | `id(my_desk).goto_position(4)`    | move to 4th stored height
+[n/a]      | `id(my_desk).goto_height(height)` | move to specified height
 
 ## Case
 

@@ -167,6 +167,16 @@ namespace esphome {
             }
         }
 
+        void JiecangDeskController::goto_height(float height) {
+            unsigned char cmd = 0x01B;
+            unsigned char high_byte = ((int) height * 10) >> 8;
+            unsigned char low_byte = ((int) height * 10) & 0xFF;
+
+            unsigned char checksum = cmd + 2 + high_byte + low_byte;
+
+            write_array({ 0xF1, 0xF1, cmd, 0x02, high_byte, low_byte, checksum, 0x7E });
+        }
+
         void JiecangDeskController::request_physical_limits() {
             send_simple_command(0x0C);
         }

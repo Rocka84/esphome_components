@@ -51,6 +51,7 @@ namespace esphome {
                 void lower();
                 void stop();
                 void goto_position(int pos);
+                void goto_height(float height);
 
                 void request_physical_limits();
                 void request_limits();
