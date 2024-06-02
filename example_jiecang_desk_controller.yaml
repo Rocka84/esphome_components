@@ -52,6 +52,8 @@ jiecang_desk_controller:
       name: "Raise"
     lower:
       name: "Lower"
+    stop:
+      name: "Stop"
     position1:
       name: "Position 1"
     position2:
@@ -75,6 +77,10 @@ jiecang_desk_controller:
 #     on_press:
 #       lambda: "id(my_desk).lower();"
 #   - platform: template
+#     name: "Stop"
+#     on_press:
+#       lambda: "id(my_desk).stop();"
+#   - platform: template
 #     name: "Position 1"
 #     on_press:
 #       lambda: "id(my_desk).goto_position(1);"
@@ -90,6 +96,10 @@ jiecang_desk_controller:
 #     name: "Position 4"
 #     on_press:
 #       lambda: "id(my_desk).goto_position(4);"
+#   - platform: template
+#     name: "Go to 100cm"
+#     on_press:
+#       lambda: "id(my_desk).goto_height(100);"
 
 
 # the usual stuff
