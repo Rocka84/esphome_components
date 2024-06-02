@@ -60,6 +60,9 @@ jiecang_desk_controller:
       name: "Position 3"
     position4:
       name: "Position 4"
+  numbers:
+    height:
+      name: "Height"
 
 ## lambda usage
 # button:

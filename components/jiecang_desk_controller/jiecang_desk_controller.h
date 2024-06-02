@@ -7,6 +7,7 @@
 #include "esphome/components/uart/uart.h"
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
+#include "jiecang_desk_number.h"
 
 #define BUTTON_RAISE 0
 #define BUTTON_LOWER 1
@@ -15,6 +16,8 @@
 #define BUTTON_POSITION2 4
 #define BUTTON_POSITION3 5
 #define BUTTON_POSITION4 6
+
+#define NUMBER_HEIGHT 0
 
 namespace esphome {
     namespace jiecang_desk_controller {
@@ -46,6 +49,7 @@ namespace esphome {
 
                 void send_simple_command(unsigned char cmd);
                 void add_button(button::Button *btn, int action);
+                void add_number(JiecangDeskNumber *number, int type);
 
                 void raise();
                 void lower();
@@ -57,6 +61,8 @@ namespace esphome {
                 void request_limits();
                 void request_settings();
 
+                void number_control(int type, float value);
+
             protected:
                 Sensor *height{nullptr};
                 Sensor *height_min{nullptr};
@@ -67,6 +73,8 @@ namespace esphome {
                 Sensor *position2{nullptr};
                 Sensor *position3{nullptr};
                 Sensor *position4{nullptr};
+
+                JiecangDeskNumber *number_height{nullptr};
 
                 void button_press_action(int type);
         };

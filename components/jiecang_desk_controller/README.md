@@ -124,6 +124,15 @@ position2  | 2nd stored height
 position3  | 3rd stored height
 position4  | 4th stored height
 
+### Available number entities
+
+Hold current values read from the desk and set values to desk when changed.
+
+sensor     | description
+-----------|----------------------------
+height     | current height of the desk
+
+
 ### Available buttons and methods
 
 button     | lambda method                     | description

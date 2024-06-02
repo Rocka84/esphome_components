@@ -59,6 +59,7 @@ namespace esphome {
                     if (new_height == current_height) return;
                     current_height = new_height;
                     if (height != nullptr) height->publish_state(current_height);
+                    if (number_height != nullptr) number_height->publish_state(current_height);
 
                     if (height_pct != nullptr && limit_max != 0)
                         height_pct->publish_state((current_height - limit_min) / (limit_max - limit_min) * 100);
@@ -70,10 +71,12 @@ namespace esphome {
                     if ((message[2] & 1) == 0) { // low nibble 0 -> no max limit, use physical_max
                         limit_max = physical_max;
                         if (height_max != nullptr) height_max->publish_state(limit_max);
+                        if (number_height != nullptr) number_height->set_max_value(limit_max);
                     }
                     if ((message[2]>>4) == 0) { // high nibble 0 -> no min limit, use physical_min
                         limit_min = physical_min;
                         if (height_min != nullptr) height_min->publish_state(limit_min);
+                        if (number_height != nullptr) number_height->set_min_value(limit_min);
                     }
                     break;
 
@@ -87,12 +90,14 @@ namespace esphome {
                     ESP_LOGV("jiecang_desk_controller", "height_max 0x%02X%02X", message[2], message[3]);
                     limit_max = byte2float(message[2], message[3]);
                     if (height_max != nullptr) height_max->publish_state(limit_max);
+                    if (number_height != nullptr) number_height->set_max_value(limit_max);
                     break;
 
                 case 0x22:
                     ESP_LOGV("jiecang_desk_controller", "height_min 0x%02X%02X", message[2], message[3]);
                     limit_min = byte2float(message[2], message[3]);
                     if (height_min != nullptr) height_min->publish_state(limit_min);
+                    if (number_height != nullptr) number_height->set_min_value(limit_min);
                     break;
 
                 case 0x25:
@@ -212,6 +217,27 @@ namespace esphome {
                     break;
                 case BUTTON_POSITION4:
                     goto_position(4);
+                    break;
+            }
+        }
+
+        void JiecangDeskController::add_number(JiecangDeskNumber *number, int type) {
+            switch (type) {
+                case NUMBER_HEIGHT:
+                    number_height = number;
+                    break;
+                default:
+                    return;
+            }
+            number->set_type(type);
+            number->set_parent(this);
+        }
+
+        void JiecangDeskController::number_control(int type, float value) {
+            ESP_LOGV("JiecangDeskController", "number_control %i", type);
+            switch (type) {
+                case NUMBER_HEIGHT:
+                    goto_height(value);
                     break;
             }
         }

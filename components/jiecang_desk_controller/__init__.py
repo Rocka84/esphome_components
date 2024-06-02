@@ -1,20 +1,22 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome import pins
-from esphome.components import uart, sensor, button
+from esphome.components import uart, sensor, button, number
 from esphome.const import CONF_ID, CONF_HEIGHT, UNIT_CENTIMETER, UNIT_PERCENT
 
 DEPENDENCIES = ['uart']
-AUTO_LOAD = ['sensor', 'button']
+AUTO_LOAD = ['sensor', 'button', 'number']
 
 jiecang_desk_controller_ns = cg.esphome_ns.namespace('jiecang_desk_controller')
 
 JiecangDeskController = jiecang_desk_controller_ns.class_('JiecangDeskController', cg.Component, uart.UARTDevice)
 JiecangDeskButton = jiecang_desk_controller_ns.class_('JiecangDeskButton', button.Button, cg.Component)
+JiecangDeskNumber = jiecang_desk_controller_ns.class_('JiecangDeskNumber', number.Number, cg.Component)
 
 
 CONF_SENSORS = "sensors"
 CONF_BUTTONS = "buttons"
+CONF_NUMBERS = "numbers"
 CONF_UNIT = "unit"
 CONF_RAISE = "raise"
 CONF_LOWER = "lower"
@@ -36,6 +38,9 @@ button_constants[CONF_POSITION1] = 3
 button_constants[CONF_POSITION2] = 4
 button_constants[CONF_POSITION3] = 5
 button_constants[CONF_POSITION4] = 6
+
+number_constants = {}
+number_constants[CONF_HEIGHT] = 0
 
 CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
     cv.GenerateID(): cv.declare_id(JiecangDeskController),
@@ -75,6 +80,12 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
             accuracy_decimals = 1,
             unit_of_measurement = UNIT_CENTIMETER
         ),
+    }),
+    cv.Optional(CONF_NUMBERS): cv.Schema({
+        cv.Optional(CONF_HEIGHT): number.NUMBER_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskNumber)}),
+        # cv.Optional(CONF_HEIGHT): number.number_schema(
+        #     unit_of_measurement = UNIT_CENTIMETER
+        # ),
     }),
     cv.Optional(CONF_BUTTONS): cv.Schema({
         cv.Optional(CONF_RAISE): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
@@ -128,4 +139,10 @@ async def to_code(config):
         for button_type in buttons.keys():
             btn = await button.new_button(buttons[button_type])
             cg.add(var.add_button(btn, button_constants[button_type]))
+
+    if CONF_NUMBERS in config:
+        numbers = config[CONF_NUMBERS]
+        for number_type in numbers.keys():
+            num = await number.new_number(numbers[number_type], min_value=0, max_value=100, step=.1)
+            cg.add(var.add_number(num, number_constants[number_type]))
 
