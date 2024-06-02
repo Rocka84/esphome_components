@@ -1,0 +1,68 @@
+esphome:
+  name: jiecang-desk-controller # change this!
+  friendly_name: Jiecang Desk Controller # change this!
+  on_boot:
+    # don't touch if you don't know what you're doing!
+    priority: 0 # when mostly everything else is done
+    then:
+      - lambda: "id(my_desk).request_physical_limits();"
+      - delay: 0.1s # give controller a chance to handle the response before sending the next command
+      - lambda: "id(my_desk).request_limits();"
+      - delay: 0.1s
+      - lambda: "id(my_desk).request_settings();"
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/Rocka84/esphome_components/
+    components: [ jiecang_desk_controller ]
+
+uart:
+  id: uart_bus
+  tx_pin: TX
+  rx_pin: RX
+  baud_rate: 9600
+
+logger:
+  baud_rate: 0 # disable logging over uart, required when using the RX/TX pins for the controller
+
+# see full example for more options: https://github.com/Rocka84/esphome_components/blob/master/example_jiecang_desk_controller.yaml
+jiecang_desk_controller:
+  id: my_desk
+  buttons:
+    raise:
+      name: "Raise"
+    lower:
+      name: "Lower"
+    stop:
+      name: "Stop"
+    position1:
+      name: "Position 1"
+    position2:
+      name: "Position 2"
+    position3:
+      name: "Position 3"
+    position4:
+      name: "Position 4"
+  numbers:
+    height:
+      name: "Height"
+
+# the usual stuff
+
+esp8266:
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "esphome-desk"
+    password: "9ebc6eac0b4e0e26b8d3b955ec660557"
+
+captive_portal:
+api:
+  encryption:
+    key: !secret encryption_key
+ota:
+
