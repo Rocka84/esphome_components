@@ -26,7 +26,7 @@ uart:
 logger:
   baud_rate: 0 # disable logging over uart, required when using the RX/TX pins for the controller
 
-# see full example for more options: https://github.com/Rocka84/esphome_components/blob/master/example_jiecang_desk_controller.yaml
+# see full example for more options: https://github.com/Rocka84/esphome_components/blob/master/components/jiecang_desk_controller/example_full.yaml
 jiecang_desk_controller:
   id: my_desk
   buttons:

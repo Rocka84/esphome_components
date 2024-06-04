@@ -28,7 +28,7 @@ pin | function
  2  | GND
  3  | TX
  4  | VCC
- 5  | GND
+ 5  | RX
  6  | NC (pulled up)
 
 #### RJ45
@@ -96,6 +96,9 @@ jiecang_desk_controller:
   sensors:
     height:
       name: "Height"
+  numbers:
+    height:
+      name: "Height"
   buttons:
     raise:
       name: "Raise"
@@ -106,12 +109,17 @@ button:
   - platform: template
     name: "Lower"
     on_press:
-      lambda: "id(my_desk).lower();"
+      lambda: "id(my_desk).goto_height(84.0);"
 ```
 
-See also [example_jiecang_desk_controller.yaml](../../example_jiecang_desk_controller.yaml).
+### Examples
 
-### Available sensors
+* basic, sufficient for most people: [example_basic.yaml](example_basic.yaml)
+* full with all features in use: [example_full.yaml](example_full.yaml)
+
+### Features
+
+#### sensors
 
 sensor     | description
 -----------|----------------------------
@@ -124,7 +132,7 @@ position2  | 2nd stored height
 position3  | 3rd stored height
 position4  | 4th stored height
 
-### Available number entities
+####  number entities
 
 Hold current values read from the desk and set values to desk when changed.
 
@@ -133,18 +141,29 @@ sensor     | description
 height     | current height of the desk
 
 
-### Available buttons and methods
+####  buttons
 
-button     | lambda method                     | description
------------|-----------------------------------|---------------------------
-raise      | `id(my_desk).raise()`             | raise desk by one step (~14mm)
-lower      | `id(my_desk).raise()`             | lower desk by one step (~14mm)
-stop       | `id(my_desk).stop()`              | stop movement of desk
-position1  | `id(my_desk).goto_position(1)`    | move to 1st stored height
-position2  | `id(my_desk).goto_position(2)`    | move to 2nd stored height
-position3  | `id(my_desk).goto_position(3)`    | move to 3rd stored height
-position4  | `id(my_desk).goto_position(4)`    | move to 4th stored height
-[n/a]      | `id(my_desk).goto_height(height)` | move to specified height
+button        | description
+--------------|---------------------------
+raise         | raise desk by one step (~14mm)
+lower         | lower desk by one step (~14mm)
+stop          | stop movement of desk
+position1     | move to 1st stored height
+position2     | move to 2nd stored height
+position3     | move to 3rd stored height
+position4     | move to 4th stored height
+save_position | press position button afterwards to store current height to that position
+
+#### lambda methods
+
+lambda method                     | description
+----------------------------------|---------------------------
+`id(my_desk).raise()`             | raise desk by one step (~14mm)
+`id(my_desk).lower()`             | lower desk by one step (~14mm)
+`id(my_desk).stop()`              | stop movement of desk
+`id(my_desk).goto_position(pos)`  | move to stored height `pos`
+`id(my_desk).save_position(pos)`  | save current height to position `pos`
+`id(my_desk).goto_height(height)` | move to specified height
 
 ## Case
 
@@ -152,5 +171,5 @@ You can find a 3D-printable case in the [stl folder](stl/) or on [onshape](https
 
 ## Sources
 
-Thanks to [phord/Jarvis](https://github.com/phord/Jarvis) for reverse engineering the UART interface and most control messages
-
+Thanks to [phord/Jarvis](https://github.com/phord/Jarvis) for reverse engineering the UART interface and most control messages!  
+Thanks to [OkhammahkO](https://github.com/OkhammahkO) for collecting the scattered information at [pimp-my-desk/desk-control](https://gitlab.com/pimp-my-desk/desk-control) and for his work in the home assistant community!
