@@ -172,8 +172,25 @@ namespace esphome {
             }
         }
 
+        void JiecangDeskController::save_position(int pos) {
+            switch (pos) {
+                case 1:
+                    send_simple_command(0x03);
+                    break;
+                case 2:
+                    send_simple_command(0x04);
+                    break;
+                case 3:
+                    send_simple_command(0x25);
+                    break;
+                case 4:
+                    send_simple_command(0x26);
+                    break;
+            }
+        }
+
         void JiecangDeskController::goto_height(float height) {
-            unsigned char cmd = 0x01B;
+            unsigned char cmd = 0x1B;
             unsigned char high_byte = ((int) height * 10) >> 8;
             unsigned char low_byte = ((int) height * 10) & 0xFF;
 
@@ -205,18 +222,42 @@ namespace esphome {
                     break;
                 case BUTTON_STOP:
                     stop();
+                    save_position_mode = false;
                     break;
                 case BUTTON_POSITION1:
+                    if (save_position_mode) {
+                        save_position_mode = false;
+                        save_position(1);
+                        return;
+                    }
                     goto_position(1);
                     break;
                 case BUTTON_POSITION2:
+                    if (save_position_mode) {
+                        save_position_mode = false;
+                        save_position(2);
+                        return;
+                    }
                     goto_position(2);
                     break;
                 case BUTTON_POSITION3:
+                    if (save_position_mode) {
+                        save_position_mode = false;
+                        save_position(3);
+                        return;
+                    }
                     goto_position(3);
                     break;
                 case BUTTON_POSITION4:
+                    if (save_position_mode) {
+                        save_position_mode = false;
+                        save_position(4);
+                        return;
+                    }
                     goto_position(4);
+                    break;
+                case BUTTON_SAVE_POSITION:
+                    save_position_mode = true;
                     break;
             }
         }

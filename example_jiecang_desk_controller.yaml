@@ -62,6 +62,8 @@ jiecang_desk_controller:
       name: "Position 3"
     position4:
       name: "Position 4"
+    save_position:
+      name: "Save Position"
   numbers:
     height:
       name: "Height"
@@ -81,21 +83,13 @@ jiecang_desk_controller:
 #     on_press:
 #       lambda: "id(my_desk).stop();"
 #   - platform: template
-#     name: "Position 1"
-#     on_press:
-#       lambda: "id(my_desk).goto_position(1);"
-#   - platform: template
 #     name: "Position 2"
 #     on_press:
 #       lambda: "id(my_desk).goto_position(2);"
 #   - platform: template
-#     name: "Position 3"
+#     name: "Save Position 4"
 #     on_press:
-#       lambda: "id(my_desk).goto_position(3);"
-#   - platform: template
-#     name: "Position 4"
-#     on_press:
-#       lambda: "id(my_desk).goto_position(4);"
+#       lambda: "id(my_desk).save_position(4);"
 #   - platform: template
 #     name: "Go to 100cm"
 #     on_press:

@@ -16,6 +16,7 @@
 #define BUTTON_POSITION2 4
 #define BUTTON_POSITION3 5
 #define BUTTON_POSITION4 6
+#define BUTTON_SAVE_POSITION 7
 
 #define NUMBER_HEIGHT 0
 
@@ -29,6 +30,8 @@ namespace esphome {
                 float limit_max = 0;
                 float physical_min = 0;
                 float physical_max = 0;
+
+                bool save_position_mode = false;
 
                 float byte2float(int high, int low);
                 bool bufferMessage(int data, unsigned int *buffer, int len);
@@ -55,6 +58,7 @@ namespace esphome {
                 void lower();
                 void stop();
                 void goto_position(int pos);
+                void save_position(int pos);
                 void goto_height(float height);
 
                 void request_physical_limits();
