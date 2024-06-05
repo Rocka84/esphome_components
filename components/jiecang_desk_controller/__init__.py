@@ -29,6 +29,8 @@ CONF_POSITION2 = "position2"
 CONF_POSITION3 = "position3"
 CONF_POSITION4 = "position4"
 CONF_SAVE_POSITION = "save_position"
+CONF_MOVE_UP = "move_up"
+CONF_MOVE_DOWN = "move_down"
 
 
 button_constants = {}
@@ -40,6 +42,8 @@ button_constants[CONF_POSITION2] = 4
 button_constants[CONF_POSITION3] = 5
 button_constants[CONF_POSITION4] = 6
 button_constants[CONF_SAVE_POSITION] = 7
+button_constants[CONF_MOVE_UP] = 8
+button_constants[CONF_MOVE_DOWN] = 9
 
 number_constants = {}
 number_constants[CONF_HEIGHT] = 0
@@ -105,6 +109,8 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
         cv.Optional(CONF_POSITION3): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
         cv.Optional(CONF_POSITION4): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
         cv.Optional(CONF_SAVE_POSITION): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
+        cv.Optional(CONF_MOVE_UP): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
+        cv.Optional(CONF_MOVE_DOWN): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
     }),
 }).extend(uart.UART_DEVICE_SCHEMA)
 

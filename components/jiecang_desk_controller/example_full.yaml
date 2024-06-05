@@ -66,6 +66,10 @@ jiecang_desk_controller:
       name: "Position 4"
     save_position:
       name: "Save Position"
+    move_up:
+      name: "Move up"
+    move_down:
+      name: "Move down"
   numbers:
     height:
       name: "Height"

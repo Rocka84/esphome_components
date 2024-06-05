@@ -17,6 +17,8 @@
 #define BUTTON_POSITION3 5
 #define BUTTON_POSITION4 6
 #define BUTTON_SAVE_POSITION 7
+#define BUTTON_MOVE_UP 8
+#define BUTTON_MOVE_DOWN 9
 
 #define NUMBER_HEIGHT 0
 #define NUMBER_HEIGHT_PCT 1
@@ -61,6 +63,8 @@ namespace esphome {
                 void goto_position(int pos);
                 void save_position(int pos);
                 void goto_height(float height);
+                void move_up();
+                void move_down();
 
                 void request_physical_limits();
                 void request_limits();

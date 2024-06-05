@@ -33,7 +33,7 @@ pin | function
 
 #### RJ45
 
-Untested and only for reference!
+**Untested** and only for reference!
 
 pin | function
 ----|---------
@@ -147,6 +147,8 @@ button        | description
 --------------|---------------------------
 raise         | raise desk by one step (~14mm)
 lower         | lower desk by one step (~14mm)
+move_up       | move up
+move_down     | move down
 stop          | stop movement of desk
 position1     | move to 1st stored height
 position2     | move to 2nd stored height
@@ -160,6 +162,8 @@ lambda method                     | description
 ----------------------------------|---------------------------
 `id(my_desk).raise()`             | raise desk by one step (~14mm)
 `id(my_desk).lower()`             | lower desk by one step (~14mm)
+`id(my_desk).move_up(height)`     | move up
+`id(my_desk).move_down(height)`   | move down
 `id(my_desk).stop()`              | stop movement of desk
 `id(my_desk).goto_position(pos)`  | move to stored height `pos`
 `id(my_desk).save_position(pos)`  | save current height to position `pos`
@@ -173,3 +177,4 @@ You can find a 3D-printable case in the [stl folder](stl/) or on [onshape](https
 
 Thanks to [phord/Jarvis](https://github.com/phord/Jarvis) for reverse engineering the UART interface and most control messages!  
 Thanks to [OkhammahkO](https://github.com/OkhammahkO) for collecting the scattered information at [pimp-my-desk/desk-control](https://gitlab.com/pimp-my-desk/desk-control) and for his work in the home assistant community!
+

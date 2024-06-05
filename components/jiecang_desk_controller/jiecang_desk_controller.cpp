@@ -201,6 +201,14 @@ namespace esphome {
             write_array({ 0xF1, 0xF1, cmd, 0x02, high_byte, low_byte, checksum, 0x7E });
         }
 
+        void JiecangDeskController::move_up() {
+            goto_height(limit_max);
+        }
+
+        void JiecangDeskController::move_down() {
+            goto_height(limit_min);
+        }
+
         void JiecangDeskController::request_physical_limits() {
             send_simple_command(0x0C);
         }
@@ -225,6 +233,12 @@ namespace esphome {
                 case BUTTON_STOP:
                     stop();
                     save_position_mode = false;
+                    break;
+                case BUTTON_MOVE_UP:
+                    move_up();
+                    break;
+                case BUTTON_MOVE_DOWN:
+                    move_down();
                     break;
                 case BUTTON_POSITION1:
                     if (save_position_mode) {
