@@ -18,8 +18,8 @@ CONF_SENSORS = "sensors"
 CONF_BUTTONS = "buttons"
 CONF_NUMBERS = "numbers"
 CONF_UNIT = "unit"
-CONF_RAISE = "raise"
-CONF_LOWER = "lower"
+CONF_STEP_UP = "step_up"
+CONF_STEP_DOWN = "step_down"
 CONF_STOP = "stop"
 CONF_HEIGHT_MIN = "height_min"
 CONF_HEIGHT_MAX = "height_max"
@@ -34,8 +34,8 @@ CONF_MOVE_DOWN = "move_down"
 
 
 button_constants = {}
-button_constants[CONF_RAISE] = 0
-button_constants[CONF_LOWER] = 1
+button_constants[CONF_STEP_UP] = 0
+button_constants[CONF_STEP_DOWN] = 1
 button_constants[CONF_STOP] = 2
 button_constants[CONF_POSITION1] = 3
 button_constants[CONF_POSITION2] = 4
@@ -44,6 +44,13 @@ button_constants[CONF_POSITION4] = 6
 button_constants[CONF_SAVE_POSITION] = 7
 button_constants[CONF_MOVE_UP] = 8
 button_constants[CONF_MOVE_DOWN] = 9
+
+# Backward compatibility
+CONF_RAISE = "raise"
+CONF_LOWER = "lower"
+button_constants[CONF_RAISE] = button_constants[CONF_STEP_UP]
+button_constants[CONF_LOWER] = button_constants[CONF_STEP_DOWN]
+
 
 number_constants = {}
 number_constants[CONF_HEIGHT] = 0
@@ -101,8 +108,8 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
         }),
     }),
     cv.Optional(CONF_BUTTONS): cv.Schema({
-        cv.Optional(CONF_RAISE): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
-        cv.Optional(CONF_LOWER): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
+        cv.Optional(CONF_STEP_UP): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
+        cv.Optional(CONF_STEP_DOWN): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
         cv.Optional(CONF_STOP): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
         cv.Optional(CONF_POSITION1): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
         cv.Optional(CONF_POSITION2): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
@@ -111,6 +118,9 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
         cv.Optional(CONF_SAVE_POSITION): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
         cv.Optional(CONF_MOVE_UP): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
         cv.Optional(CONF_MOVE_DOWN): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
+        # Backward compatibility
+        cv.Optional(CONF_RAISE): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
+        cv.Optional(CONF_LOWER): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
     }),
 }).extend(uart.UART_DEVICE_SCHEMA)
 

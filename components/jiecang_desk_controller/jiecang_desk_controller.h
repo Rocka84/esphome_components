@@ -9,8 +9,8 @@
 #include "esphome/core/log.h"
 #include "jiecang_desk_number.h"
 
-#define BUTTON_RAISE 0
-#define BUTTON_LOWER 1
+#define BUTTON_STEP_UP 0
+#define BUTTON_STEP_DOWN 1
 #define BUTTON_STOP 2
 #define BUTTON_POSITION1 3
 #define BUTTON_POSITION2 4
@@ -57,8 +57,8 @@ namespace esphome {
                 void add_button(button::Button *btn, int action);
                 void add_number(JiecangDeskNumber *number, int type);
 
-                void raise();
-                void lower();
+                void step_up();
+                void step_down();
                 void stop();
                 void goto_position(int pos);
                 void save_position(int pos);

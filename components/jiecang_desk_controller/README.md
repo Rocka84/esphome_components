@@ -100,14 +100,14 @@ jiecang_desk_controller:
     height:
       name: "Height"
   buttons:
-    raise:
-      name: "Raise"
+    step_up:
+      name: "Step up"
     position1:
       name: "Position 1"
 
 button:
   - platform: template
-    name: "Lower"
+    name: "Step down"
     on_press:
       lambda: "id(my_desk).goto_height(84.0);"
 ```
@@ -145,8 +145,8 @@ height     | current height of the desk
 
 button        | description
 --------------|---------------------------
-raise         | raise desk by one step (~14mm)
-lower         | lower desk by one step (~14mm)
+step_up       | step_up desk by one step (~14mm)
+step_down     | step_down desk by one step (~14mm)
 move_up       | move up
 move_down     | move down
 stop          | stop movement of desk
@@ -160,8 +160,8 @@ save_position | press position button afterwards to store current height to that
 
 lambda method                     | description
 ----------------------------------|---------------------------
-`id(my_desk).raise()`             | raise desk by one step (~14mm)
-`id(my_desk).lower()`             | lower desk by one step (~14mm)
+`id(my_desk).step_up()`           | step_up desk by one step (~14mm)
+`id(my_desk).step_down()`         | step_down desk by one step (~14mm)
 `id(my_desk).move_up(height)`     | move up
 `id(my_desk).move_down(height)`   | move down
 `id(my_desk).stop()`              | stop movement of desk

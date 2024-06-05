@@ -50,10 +50,10 @@ jiecang_desk_controller:
     position4:
       name: "Position 4"
   buttons:
-    raise:
-      name: "Raise"
-    lower:
-      name: "Lower"
+    step_up:
+      name: "Step up"
+    step_down:
+      name: "Step down"
     stop:
       name: "Stop"
     position1:
@@ -79,13 +79,13 @@ jiecang_desk_controller:
 ## lambda usage
 # button:
 #   - platform: template
-#     name: "Raise"
+#     name: "Step up"
 #     on_press:
-#       lambda: "id(my_desk).raise();"
+#       lambda: "id(my_desk).step_up();"
 #   - platform: template
-#     name: "Lower"
+#     name: "Step down"
 #     on_press:
-#       lambda: "id(my_desk).lower();"
+#       lambda: "id(my_desk).step_down();"
 #   - platform: template
 #     name: "Stop"
 #     on_press:

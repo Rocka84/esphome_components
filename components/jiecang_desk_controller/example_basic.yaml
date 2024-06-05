@@ -30,10 +30,10 @@ logger:
 jiecang_desk_controller:
   id: my_desk
   buttons:
-    raise:
-      name: "Raise"
-    lower:
-      name: "Lower"
+    step_up:
+      name: "Step up"
+    step_down:
+      name: "Step down"
     stop:
       name: "Stop"
     position1:

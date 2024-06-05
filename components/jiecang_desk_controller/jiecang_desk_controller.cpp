@@ -145,11 +145,11 @@ namespace esphome {
             btn->add_on_press_callback([this, action]() { this->button_press_action(action); });
         }
 
-        void JiecangDeskController::raise() {
+        void JiecangDeskController::step_up() {
             send_simple_command(0x01);
         }
 
-        void JiecangDeskController::lower() {
+        void JiecangDeskController::step_down() {
             send_simple_command(0x02);
         }
 
@@ -224,11 +224,11 @@ namespace esphome {
         void JiecangDeskController::button_press_action(int action) {
             ESP_LOGV("JiecangDeskController", "button_press_action %i", action);
             switch (action) {
-                case BUTTON_RAISE:
-                    raise();
+                case BUTTON_STEP_UP:
+                    step_up();
                     break;
-                case BUTTON_LOWER:
-                    lower();
+                case BUTTON_STEP_DOWN:
+                    step_down();
                     break;
                 case BUTTON_STOP:
                     stop();
