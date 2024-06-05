@@ -69,6 +69,8 @@ jiecang_desk_controller:
   numbers:
     height:
       name: "Height"
+    height_pct:
+      name: "Height Percent"
 
 ## lambda usage
 # button:

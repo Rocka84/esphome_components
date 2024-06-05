@@ -19,6 +19,7 @@
 #define BUTTON_SAVE_POSITION 7
 
 #define NUMBER_HEIGHT 0
+#define NUMBER_HEIGHT_PCT 1
 
 namespace esphome {
     namespace jiecang_desk_controller {
@@ -79,6 +80,7 @@ namespace esphome {
                 Sensor *position4{nullptr};
 
                 JiecangDeskNumber *number_height{nullptr};
+                JiecangDeskNumber *number_height_pct{nullptr};
 
                 void button_press_action(int type);
         };

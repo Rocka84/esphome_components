@@ -63,6 +63,8 @@ namespace esphome {
 
                     if (height_pct != nullptr && limit_max != 0)
                         height_pct->publish_state((current_height - limit_min) / (limit_max - limit_min) * 100);
+                    if (number_height_pct != nullptr && limit_max != 0)
+                        number_height_pct->publish_state(roundf((current_height - limit_min) / (limit_max - limit_min) * 1000)/10);
                     break;
 
                 case 0x20:
@@ -267,6 +269,11 @@ namespace esphome {
                 case NUMBER_HEIGHT:
                     number_height = number;
                     break;
+                case NUMBER_HEIGHT_PCT:
+                    number_height_pct = number;
+                    number_height_pct->set_min_value(0);
+                    number_height_pct->set_max_value(100);
+                    break;
                 default:
                     return;
             }
@@ -279,6 +286,9 @@ namespace esphome {
             switch (type) {
                 case NUMBER_HEIGHT:
                     goto_height(value);
+                    break;
+                case NUMBER_HEIGHT_PCT:
+                    if (limit_max != 0) goto_height((limit_max - limit_min) * value / 100 + limit_min);
                     break;
             }
         }

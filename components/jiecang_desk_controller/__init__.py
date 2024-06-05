@@ -2,7 +2,7 @@ import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome import pins
 from esphome.components import uart, sensor, button, number
-from esphome.const import CONF_ID, CONF_HEIGHT, UNIT_CENTIMETER, UNIT_PERCENT
+from esphome.const import CONF_ID, CONF_HEIGHT, CONF_UNIT_OF_MEASUREMENT, CONF_ACCURACY_DECIMALS, UNIT_CENTIMETER, UNIT_PERCENT
 
 DEPENDENCIES = ['uart']
 AUTO_LOAD = ['sensor', 'button', 'number']
@@ -43,6 +43,7 @@ button_constants[CONF_SAVE_POSITION] = 7
 
 number_constants = {}
 number_constants[CONF_HEIGHT] = 0
+number_constants[CONF_HEIGHT_PCT] = 1
 
 CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
     cv.GenerateID(): cv.declare_id(JiecangDeskController),
@@ -84,10 +85,16 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
         ),
     }),
     cv.Optional(CONF_NUMBERS): cv.Schema({
-        cv.Optional(CONF_HEIGHT): number.NUMBER_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskNumber)}),
-        # cv.Optional(CONF_HEIGHT): number.number_schema(
-        #     unit_of_measurement = UNIT_CENTIMETER
-        # ),
+        cv.Optional(CONF_HEIGHT): number.NUMBER_SCHEMA.extend({
+            cv.GenerateID(): cv.declare_id(JiecangDeskNumber),
+            cv.Optional(CONF_ACCURACY_DECIMALS, default=1): cv.int_,
+            cv.Optional(CONF_UNIT_OF_MEASUREMENT, default=UNIT_CENTIMETER): cv.string,
+        }),
+        cv.Optional(CONF_HEIGHT_PCT): number.NUMBER_SCHEMA.extend({
+            cv.GenerateID(): cv.declare_id(JiecangDeskNumber),
+            cv.Optional(CONF_ACCURACY_DECIMALS, default=1): cv.int_,
+            cv.Optional(CONF_UNIT_OF_MEASUREMENT, default=UNIT_PERCENT): cv.string,
+        }),
     }),
     cv.Optional(CONF_BUTTONS): cv.Schema({
         cv.Optional(CONF_RAISE): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
