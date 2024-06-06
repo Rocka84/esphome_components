@@ -50,12 +50,16 @@ jiecang_desk_controller:
     position4:
       name: "Position 4"
   buttons:
+    move_up:
+      name: "Move up"
+    move_down:
+      name: "Move down"
+    stop:
+      name: "Stop"
     step_up:
       name: "Step up"
     step_down:
       name: "Step down"
-    stop:
-      name: "Stop"
     position1:
       name: "Position 1"
     position2:
