@@ -50,6 +50,7 @@ namespace esphome {
 
         void JiecangDeskController::handleMessage(unsigned int *message) {
             // ESP_LOGV("jiecang_desk_controller", "message %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X", message[0], message[1], message[2], message[3], message[4], message[5], message[6], message[7], message[8], message[9]);
+            this->last_message_time = millis();
 
             switch (message[0]) {
                 case 0x01:
@@ -138,6 +139,17 @@ namespace esphome {
         }
 
         void JiecangDeskController::send_simple_command(unsigned char cmd) {
+            // If more than 5 seconds passed since last message, assume desk is asleep
+            if (millis() - this->last_message_time >= 5000) {
+                ESP_LOGV(TAG, "Sending wake-up signal.");
+                write_command(0x2B);  // send STOP to wake up
+                delay(100);  // brief delay to allow the desk to wake up
+            }
+
+            write_command(cmd);
+        }
+
+        void JiecangDeskController::write_command(unsigned char cmd) {
             write_array({ 0xF1, 0xF1, cmd, 0x00, cmd, 0x7E });
         }
 

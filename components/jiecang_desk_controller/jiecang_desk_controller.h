@@ -28,6 +28,7 @@ namespace esphome {
 
         class JiecangDeskController : public PollingComponent, public sensor::Sensor, public uart::UARTDevice {
             private:
+                uint32_t last_message_time = 0;
                 float current_height = 0;
                 float limit_min = 0;
                 float limit_max = 0;
@@ -39,6 +40,7 @@ namespace esphome {
                 float byte2float(int high, int low);
                 bool bufferMessage(int data, unsigned int *buffer, int len);
                 void handleMessage(unsigned int *message);
+                void write_command(unsigned char cmd);
 
             public:
                 void update() override;
