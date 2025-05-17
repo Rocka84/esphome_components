@@ -54,7 +54,7 @@ namespace esphome {
 
             switch (message[0]) {
                 case 0x01:
-                    ESP_LOGV("jiecang_desk_controller", "height 0x%0X%0X", message[2], message[3]);
+                    ESP_LOGV("jiecang_desk_controller", "height 0x%02X%02X", message[2], message[3]);
                     float new_height;
                     new_height = byte2float(message[2], message[3]);
                     if (new_height == current_height) return;
@@ -68,8 +68,12 @@ namespace esphome {
                         number_height_pct->publish_state(roundf((current_height - limit_min) / (limit_max - limit_min) * 1000)/10);
                     break;
 
+                case 0x1B:
+                    ESP_LOGV("jiecang_desk_controller", "target_height 0x%02X%02X = %f", message[2], message[3], byte2float(message[2], message[3]));
+                    break;
+
                 case 0x20:
-                    ESP_LOGV("jiecang_desk_controller", "limits 0x%0X  max %i min %i", message[2], (message[2] & 1), (message[2]>>4));
+                    ESP_LOGV("jiecang_desk_controller", "limits 0x%02X  max %i min %i", message[2], (message[2] & 1), (message[2]>>4));
 
                     if ((message[2] & 1) == 0) { // low nibble 0 -> no max limit, use physical_max
                         limit_max = physical_max;
