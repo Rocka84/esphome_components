@@ -96,31 +96,29 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
         ),
     }),
     cv.Optional(CONF_NUMBERS): cv.Schema({
-        cv.Optional(CONF_HEIGHT): number.NUMBER_SCHEMA.extend({
-            cv.GenerateID(): cv.declare_id(JiecangDeskNumber),
+        cv.Optional(CONF_HEIGHT): number.number_schema(JiecangDeskNumber).extend({
             cv.Optional(CONF_ACCURACY_DECIMALS, default=1): cv.int_,
             cv.Optional(CONF_UNIT_OF_MEASUREMENT, default=UNIT_CENTIMETER): cv.string,
         }),
-        cv.Optional(CONF_HEIGHT_PCT): number.NUMBER_SCHEMA.extend({
-            cv.GenerateID(): cv.declare_id(JiecangDeskNumber),
+        cv.Optional(CONF_HEIGHT_PCT): number.number_schema(JiecangDeskNumber).extend({
             cv.Optional(CONF_ACCURACY_DECIMALS, default=1): cv.int_,
             cv.Optional(CONF_UNIT_OF_MEASUREMENT, default=UNIT_PERCENT): cv.string,
         }),
     }),
     cv.Optional(CONF_BUTTONS): cv.Schema({
-        cv.Optional(CONF_STEP_UP): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
-        cv.Optional(CONF_STEP_DOWN): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
-        cv.Optional(CONF_STOP): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
-        cv.Optional(CONF_POSITION1): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
-        cv.Optional(CONF_POSITION2): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
-        cv.Optional(CONF_POSITION3): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
-        cv.Optional(CONF_POSITION4): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
-        cv.Optional(CONF_SAVE_POSITION): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
-        cv.Optional(CONF_MOVE_UP): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
-        cv.Optional(CONF_MOVE_DOWN): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
+        cv.Optional(CONF_STEP_UP): button.button_schema(JiecangDeskButton),
+        cv.Optional(CONF_STEP_DOWN): button.button_schema(JiecangDeskButton),
+        cv.Optional(CONF_STOP): button.button_schema(JiecangDeskButton),
+        cv.Optional(CONF_POSITION1): button.button_schema(JiecangDeskButton),
+        cv.Optional(CONF_POSITION2): button.button_schema(JiecangDeskButton),
+        cv.Optional(CONF_POSITION3): button.button_schema(JiecangDeskButton),
+        cv.Optional(CONF_POSITION4): button.button_schema(JiecangDeskButton),
+        cv.Optional(CONF_SAVE_POSITION): button.button_schema(JiecangDeskButton),
+        cv.Optional(CONF_MOVE_UP): button.button_schema(JiecangDeskButton),
+        cv.Optional(CONF_MOVE_DOWN): button.button_schema(JiecangDeskButton),
         # Backward compatibility
-        cv.Optional(CONF_RAISE): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
-        cv.Optional(CONF_LOWER): button.BUTTON_SCHEMA.extend({cv.GenerateID(): cv.declare_id(JiecangDeskButton)}),
+        cv.Optional(CONF_RAISE): button.button_schema(JiecangDeskButton),
+        cv.Optional(CONF_LOWER): button.button_schema(JiecangDeskButton),
     }),
 }).extend(uart.UART_DEVICE_SCHEMA)
 
