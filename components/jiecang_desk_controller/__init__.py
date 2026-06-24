@@ -9,7 +9,7 @@ AUTO_LOAD = ['sensor', 'button', 'number']
 
 jiecang_desk_controller_ns = cg.esphome_ns.namespace('jiecang_desk_controller')
 
-JiecangDeskController = jiecang_desk_controller_ns.class_('JiecangDeskController', cg.Component, uart.UARTDevice)
+JiecangDeskController = jiecang_desk_controller_ns.class_('JiecangDeskController', cg.PollingComponent, uart.UARTDevice)
 JiecangDeskButton = jiecang_desk_controller_ns.class_('JiecangDeskButton', button.Button, cg.Component)
 JiecangDeskNumber = jiecang_desk_controller_ns.class_('JiecangDeskNumber', number.Number, cg.Component)
 
@@ -56,7 +56,7 @@ number_constants = {}
 number_constants[CONF_HEIGHT] = 0
 number_constants[CONF_HEIGHT_PCT] = 1
 
-CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
+CONFIG_SCHEMA = cv.polling_component_schema("50ms").extend({
     cv.GenerateID(): cv.declare_id(JiecangDeskController),
     cv.Optional(CONF_SENSORS): cv.Schema({
         cv.Optional(CONF_HEIGHT): sensor.sensor_schema(
