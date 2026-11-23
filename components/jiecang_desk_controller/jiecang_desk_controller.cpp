@@ -142,14 +142,17 @@ namespace esphome {
             }
         }
 
-        void JiecangDeskController::send_simple_command(unsigned char cmd) {
+        void JiecangDeskController::wake_up_if_asleep() {
             // If more than 5 seconds passed since last message, assume desk is asleep
             if (millis() - this->last_message_time >= 5000) {
                 ESP_LOGV(TAG, "Sending wake-up signal.");
                 write_command(0x2B);  // send STOP to wake up
                 delay(100);  // brief delay to allow the desk to wake up
             }
+        }
 
+        void JiecangDeskController::send_simple_command(unsigned char cmd) {
+            wake_up_if_asleep();
             write_command(cmd);
         }
 
@@ -208,9 +211,12 @@ namespace esphome {
         }
 
         void JiecangDeskController::goto_height(float height) {
+            wake_up_if_asleep();
+
             unsigned char cmd = 0x1B;
-            unsigned char high_byte = ((int) height * 10) >> 8;
-            unsigned char low_byte = ((int) height * 10) & 0xFF;
+            int height_mm = static_cast<int>(roundf(height * 10));
+            unsigned char high_byte = height_mm >> 8;
+            unsigned char low_byte = height_mm & 0xFF;
 
             unsigned char checksum = cmd + 2 + high_byte + low_byte;
 
