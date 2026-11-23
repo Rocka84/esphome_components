@@ -214,8 +214,9 @@ namespace esphome {
             wake_up_if_asleep();
 
             unsigned char cmd = 0x1B;
-            unsigned char high_byte = ((int) height * 10) >> 8;
-            unsigned char low_byte = ((int) height * 10) & 0xFF;
+            int height_mm = static_cast<int>(roundf(height * 10));
+            unsigned char high_byte = height_mm >> 8;
+            unsigned char low_byte = height_mm & 0xFF;
 
             unsigned char checksum = cmd + 2 + high_byte + low_byte;
 
