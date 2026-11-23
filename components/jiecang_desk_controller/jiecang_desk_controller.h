@@ -41,6 +41,7 @@ namespace esphome {
                 bool bufferMessage(int data, unsigned int *buffer, int len);
                 void handleMessage(unsigned int *message);
                 void write_command(unsigned char cmd);
+                void wake_up_if_asleep();
 
             public:
                 void update() override;
